@@ -28,30 +28,18 @@ docker service create --name myweb --replicas 3 nginx
 
 
 ## POLICY
-
-MIN_NO		최소 컨테이너 수
-
-MAX_NO		최대 컨테이너 수
-
-COND_ITEM	조건 대상(cpu_ratio, ...)
-
-OUT_COND	확장 조건(70%)
-
-IN_COND		축소 조건(10%)
-
-OUT_DURATION	확장 조건 충족 시간(10m)
-
-IN_COND		축소 조건 충족 시간(10m)
-
-SERVICE_ID	서비스 ID
-
+* MIN_NO		최소 컨테이너 수
+* MAX_NO		최대 컨테이너 수
+* COND_ITEM	조건 대상(cpu_ratio, ...)
+* OUT_COND	확장 조건(70%)
+* IN_COND		축소 조건(10%)
+* OUT_DURATION	확장 조건 충족 시간(10m)
+* IN_COND		축소 조건 충족 시간(10m)
+* SERVICE_ID	서비스 ID
 
 ## Scale sql
+* 10분 이내에, 두개의 컨테이너로 구성되는 서비스의 평균 CPU 점유율
+  + select mean(cpu_ratio) from docker where container = '1e7563c03ae9' or container = '44fc2346b432' time > now() - 10m
 
-10분 이내에, 두개의 컨테이너로 구성되는 서비스의 평균 CPU 점유율
-
-select mean(cpu_ratio) from docker where container = '1e7563c03ae9' or container = '44fc2346b432' time > now() - 10m
-
-10분 이내에, 서비스id를 구성하는 컨테이너의 평균 CPU 점유율
-
-select mean(cpu_ratio) from docker where service = 'serviceid' and time > now() - 10m
+* 10분 이내에, 서비스id를 구성하는 컨테이너의 평균 CPU 점유율
+  + select mean(cpu_ratio) from docker where service = 'serviceid' and time > now() - 10m
