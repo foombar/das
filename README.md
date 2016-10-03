@@ -1,19 +1,19 @@
 ### Docker Auto Scaling
 
 ## 구성 / 설치
-manager : swarm manager
+  * manager : swarm manager
 
-influxdb
+    + influxdb
 
-das(docker auto scaler)
+    + das(docker auto scaler)
 
-worker1 : swarm worker1
+  * worker1 : swarm worker1
 
-ds(docker stats/service_id -> influxdb)
+    + ds(docker stats/service_id -> influxdb)
 
-worker2 : swarm worker1
+  * worker2 : swarm worker2
 
-ds(docker stats/service_id -> influxdb)
+    + ds(docker stats/service_id -> influxdb)
 
 ## Flow
 1. worker 노드들은 ds(docker stats)를 수행하여 주기적으로 influxdb(manager) 에 적재(container의 service_id 포함)  
