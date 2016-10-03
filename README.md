@@ -2,17 +2,11 @@
 
 ## 구성 / 설치
   * manager : swarm manager
-
     + influxdb
-
     + das(docker auto scaler)
-
   * worker1 : swarm worker1
-
     + ds(docker stats/service_id -> influxdb)
-
   * worker2 : swarm worker2
-
     + ds(docker stats/service_id -> influxdb)
 
 ## Flow
@@ -22,10 +16,23 @@
   ex) select mean(cpu_ratio) from docker where service = 'service_id' and time > now() - 10m
 3. 조건에 맞을 경우 docker service update --replicas n 를 수행
 
+## docker stats
+* tags
+  * node
+  * container
+  * service
+* fields
+  * cpu_ratio
+  * mem_usage
+  * mem_limit
+  * mem_ratio
+  * net_read
+  * net_write
+  * blk_read
+  * blk_write
+
 ## Test 
-docker service create --name myweb --replicas 3 nginx
-
-
+* docker service create --name myweb --replicas 3 nginx
 
 ## POLICY
 * MIN_NO		최소 컨테이너 수
