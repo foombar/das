@@ -40,7 +40,10 @@
     + create user "docker" with password "docker"
   + pip install docker-py
   + pip install influxdb
-  + change influxdb setup(dbhost/dbip/dbuser/dbpass/dbname) in das.py
+  + change influxdb setup(dbhost/dbip/dbuser/dbpass/dbname) in das.py nad ds.py
+  + docker run -d -p 4200:4200 -p 4300:4300 crate
+    + http://manager:4200/admin
+  + pip install crate
   + $ ./das.py
     
 * worker
@@ -50,12 +53,29 @@
 ## POLICY
 * MIN_NO		최소 컨테이너 수
 * MAX_NO		최대 컨테이너 수
+* CUR_NO  현재 컨테이너 수
 * COND_ITEM	조건 대상(cpu_ratio, ...)
 * OUT_COND	확장 조건(70%)
 * IN_COND		축소 조건(10%)
 * OUT_DURATION	확장 조건 충족 시간(10m)
-* IN_COND		축소 조건 충족 시간(10m)
+* IN_DURATION 축소 조건 충족 시간(10m)
 * SERVICE_ID	서비스 ID
+
+* create table das (
+  seq int primary key,
+  min_no int,
+  max_no int,
+  cur_no int,
+  cond_item STRING,
+  out_cond STRING,
+  in_cond STRING,
+  out_duration STRING,
+  in_duration STRING,
+  service_id  STRING
+  );
+
+* insert into das (seq, min_no, max_no, cur_no, cond_item, out_cond, in_cond, out_duration, in_duration, service_id) 
+  values(1, 1, 10, 3, 'cpu_ratio', '70%', '10%', '10m', '10m', '6dnh8i971l5h');
 
 ## Scale sql
 * 10분 이내에, 두개의 컨테이너로 구성되는 서비스의 평균 CPU 점유율
