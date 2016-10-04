@@ -49,7 +49,6 @@
 ## POLICY
 * MIN_NO		최소 컨테이너 수
 * MAX_NO		최대 컨테이너 수
-* CUR_NO  현재 컨테이너 수
 * COND_ITEM	조건 대상(cpu_ratio, ...)
 * OUT_COND	확장 조건(70%)
 * IN_COND		축소 조건(10%)
