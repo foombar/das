@@ -34,7 +34,7 @@
 ## Test 
 * manager
   + docker service create --name myweb --replicas 3 nginx
-  + docker run -p 8083:8083 -p 8086:8086 -v $PWD:/var/lib/influxdb influxdb
+  + docker run -d -p 8083:8083 -p 8086:8086 -v $PWD:/var/lib/influxdb influxdb
     + http://manager:8083
     + create database "docker"
     + create user "docker" with password "docker"
