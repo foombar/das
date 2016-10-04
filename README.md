@@ -18,18 +18,9 @@
 
 ## docker stats
 * tags
-  * node
-  * container
-  * service
+  * node, container, service
 * fields
-  * cpu_ratio
-  * mem_usage
-  * mem_limit
-  * mem_ratio
-  * net_read
-  * net_write
-  * blk_read
-  * blk_write
+  * cpu_ratio, mem_usage, mem_limit, mem_ratio, net_read, net_write, blk_read, blk_write
 
 ## Test 
 * manager
@@ -43,6 +34,10 @@
   + change influxdb setup(dbhost/dbip/dbuser/dbpass/dbname) in das.py nad ds.py
   + docker run -d -p 4200:4200 -p 4300:4300 crate
     + http://manager:4200/admin
+    + create table das (
+      seq int primary key, min_no int, max_no int, cur_no int, cond_item STRING,
+      out_cond STRING, in_cond STRING, out_duration STRING, in_duration STRING, service_id  STRING
+      );
   + pip install crate
   + $ ./das.py
     
@@ -60,19 +55,6 @@
 * OUT_DURATION	확장 조건 충족 시간(10m)
 * IN_DURATION 축소 조건 충족 시간(10m)
 * SERVICE_ID	서비스 ID
-
-* create table das (
-  seq int primary key,
-  min_no int,
-  max_no int,
-  cur_no int,
-  cond_item STRING,
-  out_cond STRING,
-  in_cond STRING,
-  out_duration STRING,
-  in_duration STRING,
-  service_id  STRING
-  );
 
 * insert into das (seq, min_no, max_no, cur_no, cond_item, out_cond, in_cond, out_duration, in_duration, service_id) 
   values(1, 1, 10, 3, 'cpu_ratio', '70%', '10%', '10m', '10m', '6dnh8i971l5h');
