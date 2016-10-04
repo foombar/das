@@ -16,7 +16,7 @@ import platform
 import random
 from influxdb import InfluxDBClient
 
-dbhost = "172.16.10.130"
+dbhost = "10.0.4.161"
 dbport = 8086
 dbuser = "docker"
 dbpass = "docker"
@@ -104,7 +104,7 @@ def getStat(consvr):
       net_read = tovalue(items[8], items[9])
       net_write = tovalue(items[11], items[12])
       blk_read = tovalue(items[13], items[14])
-      blk_write = tovalue(items[16], items[1])
+      blk_write = tovalue(items[16], items[17])
       container = items[0]
       json = {
         "measurement": "docker",

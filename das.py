@@ -34,16 +34,12 @@ def getContainer(service):
     # filters = id, name, service, node, label, desired-state
     slots = dockerclient.tasks(filters={"service":service, "desired-state":"running"})
     for container in slots:
-      print "." 
-      #print container["Status"]["ContainerStatus"]["ContainerID"]
-    print 'getContainer'
+      print container["Status"]["ContainerStatus"]["ContainerID"]
     
 def docker_services():
     services = dockerclient.services()
     for svc in services:
-      print "."
-      #print svc["ID"], svc["Spec"]["Name"]
-    print 'docker_services'
+      print svc["ID"], svc["Spec"]["Name"]
 
 def influx_test():
     service = 'cz39bqf8mntal09ihuttinnfh'
@@ -55,9 +51,9 @@ def influx_test():
     print result.raw
 
 def main():
-#    docker_services()
-#    getContainer("myweb")
-    influx_test()
+    docker_services()
+    getContainer("web9000")
+#    influx_test()
 
 if __name__ == '__main__':
     args = parse_args()

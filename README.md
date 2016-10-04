@@ -1,6 +1,6 @@
 ### Docker Auto Scaling
 
-## 구성 / 설치
+## 구성 및 설치
   * manager : swarm manager
     + influxdb
     + das(docker auto scaler)
