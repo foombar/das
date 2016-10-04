@@ -32,8 +32,21 @@
   * blk_write
 
 ## Test 
-* docker service create --name myweb --replicas 3 nginx
-
+* manager
+  + docker service create --name myweb --replicas 3 nginx
+  + docker run -p 8083:8083 -p 8086:8086 -v $PWD:/var/lib/influxdb influxdb
+    + http://manager:8083
+    + create database "docker"
+    + create user "docker" with password "docker"
+  + pip install docker-py
+  + pip install influxdb
+  + change influxdb setup(dbhost/dbip/dbuser/dbpass/dbname) in das.py
+  + $ ./das.py
+    
+* worker
+  + pip install influxdb
+  + $ ./ds.py
+  
 ## POLICY
 * MIN_NO		최소 컨테이너 수
 * MAX_NO		최대 컨테이너 수
