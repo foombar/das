@@ -56,10 +56,12 @@
 * IN_DURATION 축소 조건 충족 시간(10m)
 * SERVICE_ID	서비스 ID
 
-* insert into das (seq, min_no, max_no, cur_no, cond_item, out_cond, in_cond, out_duration, in_duration, service_id) 
-  values(1, 1, 10, 3, 'cpu_ratio', '70%', '10%', '10m', '10m', '6dnh8i971l5h');
 
 ## Scale sql
+* 특정 서비스의 autoscale 등록
+  + insert into das (seq, min_no, max_no, cur_no, cond_item, out_cond, in_cond, out_duration, in_duration, service_id) 
+    values(1, 1, 10, 3, 'cpu_ratio', '70%', '10%', '10m', '10m', '6dnh8i971l5h');
+  
 * 10분 이내에, 두개의 컨테이너로 구성되는 서비스의 평균 CPU 점유율
   + select mean(cpu_ratio) from docker where container = '1e7563c03ae9' or container = '44fc2346b432' time > now() - 10m
 
