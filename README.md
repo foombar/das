@@ -32,7 +32,7 @@
     + create user "docker" with password "docker"
   + pip install docker-py
   + pip install influxdb
-  + change influxdb setup(dbhost/dbip/dbuser/dbpass/dbname) in das.py nad ds.py
+  + change influxdb setup(dbhost/dbip/dbuser/dbpass/dbname) in das.py / ds.py
   + docker run -d -p 4200:4200 -p 4300:4300 crate
     + http://manager:4200/admin
     + create table das (
