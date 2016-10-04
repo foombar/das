@@ -68,3 +68,4 @@
 
 * 10분 이내에, 서비스id를 구성하는 컨테이너의 평균 CPU 점유율
   + select mean(cpu_ratio) from docker where service = 'serviceid' and time > now() - 10m
+
