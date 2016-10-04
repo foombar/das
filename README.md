@@ -2,7 +2,8 @@
 
 ## 구성 및 설치
   * manager : swarm manager
-    + influxdb
+    + influxdb (for measuring)
+    + crate db (for policy)
     + das(docker auto scaler)
   * worker1 : swarm worker1
     + ds(docker stats/service_id -> influxdb)
