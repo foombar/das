@@ -101,10 +101,10 @@ def getStat(consvr):
       mem_usage = tovalue(items[2], items[3])
       mem_limit = tovalue(items[5], items[6])
       mem_ratio = float(items[7].strip('%'))
-      net_read = tovalue(items[8], items[9])
-      net_write = tovalue(items[11], items[12])
-      blk_read = tovalue(items[13], items[14])
-      blk_write = tovalue(items[16], items[17])
+      net_input = tovalue(items[8], items[9])
+      net_output = tovalue(items[11], items[12])
+      blk_input = tovalue(items[13], items[14])
+      blk_output = tovalue(items[16], items[17])
       container = items[0]
       json = {
         "measurement": "docker",
@@ -118,10 +118,10 @@ def getStat(consvr):
           "mem_usage": mem_usage,
           "mem_limit": mem_limit,
           "mem_ratio": mem_ratio,
-          "net_read" : net_read,
-          "net_write": net_write,
-          "blk_read" : blk_read,
-          "blk_write": blk_write
+          "net_input" : net_input,
+          "net_output": net_output,
+          "blk_input" : blk_input,
+          "blk_output": blk_output
         }
       }
       json_body.append(json)
