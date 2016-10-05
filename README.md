@@ -21,7 +21,7 @@
 * tags
   * node, container, service
 * fields
-  * cpu_ratio, mem_usage, mem_limit, mem_ratio, net_read, net_write, blk_read, blk_write
+  * cpu_ratio, mem_usage, mem_limit, mem_ratio, net_input, net_output, blk_input, blk_output
 
 ## Test 
 * manager
@@ -59,12 +59,12 @@
 
 ## Scale sql
 * 특정 서비스의 autoscale 등록
-  + insert into das (seq, min_no, max_no, cur_no, cond_item, out_cond, in_cond, out_duration, in_duration, service_id) 
-    values(1, 1, 10, 3, 'cpu_ratio', '70%', '10%', '10m', '10m', '6dnh8i971l5h');
+  + insert into das (seq, min_no, max_no, cond_item, out_cond, in_cond, out_duration, in_duration, service_id) 
+    values(1, 1, 10, 'cpu_ratio', '70%', '10%', '10m', '10m', '6dnh8i971l5h');
   
 * 10분 이내에, 두개의 컨테이너로 구성되는 서비스의 평균 CPU 점유율
   + select mean(cpu_ratio) from docker where (container = '1e7563c03ae9' or container = '44fc2346b432') and time > now() - 10m
 
 * 10분 이내에, 서비스id를 구성하는 컨테이너의 평균 CPU 점유율
-  + select mean(cpu_ratio) from docker where service = 'serviceid' and time > now() - 10m
+  + select mean(cpu_ratio) from docker where service = 'service_id' and time > now() - 10m
 
