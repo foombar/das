@@ -12,15 +12,18 @@ import subprocess
 import platform
 from docker import Client
 from influxdb import InfluxDBClient
+from crate import client
 
-dbhost = "172.16.10.130"
-dbport = 8086
-dbuser = "docker"
-dbpass = "docker"
-dbname = "docker"
+idbhost = "10.0.4.161"
+idbport = 8086
+idbuser = "docker"
+idbpass = "docker"
+idbname = "docker"
 
-dbclient = InfluxDBClient(dbhost, dbport, dbuser, dbpass, dbname)
+cdbhost = "10.0.4.161:4200"
+
 dockerclient = Client(base_url='unix://var/run/docker.sock')
+idbclient = InfluxDBClient(idbhost, idbport, idbuser, idbpass, idbname)
 
 def parse_args():
     parser = argparse.ArgumentParser(description='docker stats write to InfluxDB')
@@ -35,6 +38,16 @@ def getContainer(service):
     slots = dockerclient.tasks(filters={"service":service, "desired-state":"running"})
     for container in slots:
       print container["Status"]["ContainerStatus"]["ContainerID"]
+
+def getPolicy(service):
+    cdbclient = client.connect(cdbhost)
+    cursor = cdbclient.cursor()
+    cursor.execute("select service_id, cond_item, min_no, max_no, cur_no, out_cond, in_cond, out_duration, in_duration from das where service_id = ?", (service,))
+    result = cursor.fetchall()
+    for row in result:
+      print row
+    cursor.close()
+    cdbclient.close()
     
 def docker_services():
     services = dockerclient.services()
@@ -45,7 +58,8 @@ def influx_test():
     service = 'cz39bqf8mntal09ihuttinnfh'
 #    sql = "select mean(cpu_ratio) from docker where service = '"+service+"' and time > now() - 10m"
     sql = "select mean(cpu_ratio) from docker where service = '"+service+"'"
-    result = dbclient.query(sql)
+#    sql = "select mean(cpu_ratio) from docker"
+    result = idbclient.query(sql)
     print result.keys()
     print result.items()
     print result.raw
@@ -53,6 +67,7 @@ def influx_test():
 def main():
     docker_services()
     getContainer("web9000")
+    getPolicy("6dnh8i971l5h")
 #    influx_test()
 
 if __name__ == '__main__':
